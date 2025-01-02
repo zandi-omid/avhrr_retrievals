@@ -1,0 +1,27 @@
+[stage_1]
+dataset_module = ".data"
+training_dataset = "SPRSpatial"
+training_dataset_args = {split="training"}
+validation_dataset_args = {split="validation"}
+optimizer = "Adam"
+optimizer_args = {lr=5e-4}
+scheduler = "CosineAnnealingLR"
+scheduler_args = {T_max=20}
+n_epochs = 20
+batch_size = 16
+n_dataloader_workers = 8
+metrics = ["MSE", "Bias", "CorrelationCoef", "PlotSamples"]
+
+[stage_2]
+dataset_module = ".data"
+training_dataset = "SPRSpatial"
+training_dataset_args = {split="training"}
+validation_dataset_args = {split="validation"}
+optimizer = "Adam"
+optimizer_args = {lr=5e-4}
+scheduler = "CosineAnnealingLR"
+scheduler_args = {T_max=20}
+n_epochs = 40
+batch_size = 16
+n_dataloader_workers = 8
+metrics = [ "MSE", "Bias", "CorrelationCoef", "PlotSamples"]

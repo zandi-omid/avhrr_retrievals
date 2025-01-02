@@ -1,0 +1,122 @@
+name = "ipwgml_efficient_net_v2"
+
+[architecture]
+name = "EncoderDecoder"
+
+[architecture.encoder]
+channels = [ 24, 48, 64, 128, 160, 256,]
+downsampling_factors = [ 1, 2, 2, 2, 2,]
+stage_depths = [ 1, 2, 2, 3, 4, 15,]
+block_factory = [ "InvertedBottleneck", "InvertedBottleneck", "InvertedBottleneck", "InvertedBottleneck", "InvertedBottleneck", "InvertedBottleneck",]
+[[architecture.encoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+expansion_factor = 1
+excitation_ratio = 0.0
+fused = true
+anti_aliasing = true
+
+[[architecture.encoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.9
+expansion_factor = 4
+excitation_ratio = 0.0
+fused = true
+anti_aliasing = true
+
+[[architecture.encoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.8
+expansion_factor = 4
+excitation_ratio = 0.0
+fused = true
+anti_aliasing = true
+
+[[architecture.encoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.7
+expansion_factor = 4
+excitation_ratio = 0.25
+anti_aliasing = true
+
+[[architecture.encoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.6
+expansion_factor = 6
+excitation_ratio = 0.25
+anti_aliasing = true
+
+[[architecture.encoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.5
+expansion_factor = 6
+excitation_ratio = 0.25
+anti_aliasing = true
+
+[architecture.decoder]
+channels = [ 160, 128, 64, 48, 24,]
+upsampling_factors = [ 2, 2, 2, 2, 1,]
+stage_depths = [ 4, 3, 2, 2, 1,]
+block_factory = [ "InvertedBottleneck", "InvertedBottleneck", "InvertedBottleneck", "InvertedBottleneck", "InvertedBottleneck",]
+skip_connections = true
+[[architecture.decoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.6
+expansion_factor = 6
+excitation_ratio = 0.25
+anti_aliasing = true
+
+[[architecture.decoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.7
+expansion_factor = 4
+excitation_ratio = 0.25
+anti_aliasing = true
+
+[[architecture.decoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.8
+expansion_factor = 4
+excitation_ratio = 0.0
+fused = true
+anti_aliasing = true
+
+[[architecture.decoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+stochastic_depth = 0.9
+expansion_factor = 4
+excitation_ratio = 0.0
+fused = true
+anti_aliasing = true
+
+[[architecture.decoder.block_factory_args]]
+activation_factory = "GELU"
+normalization_factory = "LayerNormFirst"
+expansion_factor = 1
+excitation_ratio = 0.0
+fused = true
+anti_aliasing = true
+
+[architecture.stem]
+individual = false
+depth = 1
+in_channels = 16
+out_channels = 24
+
+[input.obs_gmi]
+name = "obs_gmi"
+n_features = 13
+normalize = "minmax"
+
+[output.surface_precip]
+kind = "Quantiles"
+quantiles = 32
