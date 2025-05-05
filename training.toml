@@ -1,6 +1,6 @@
 [stage_1]
 dataset_module = ".data"
-training_dataset = "SPRSpatial"
+training_dataset = "AVHRRDataset"
 training_dataset_args = {split="training"}
 validation_dataset_args = {split="validation"}
 optimizer = "Adam"
@@ -14,7 +14,7 @@ metrics = ["MSE", "Bias", "CorrelationCoef", "PlotSamples"]
 
 [stage_2]
 dataset_module = ".data"
-training_dataset = "SPRSpatial"
+training_dataset = "AVHRRDataset"
 training_dataset_args = {split="training"}
 validation_dataset_args = {split="validation"}
 optimizer = "Adam"

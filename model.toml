@@ -112,9 +112,9 @@ depth = 1
 in_channels = 16
 out_channels = 24
 
-[input.obs_gmi]
-name = "obs_gmi"
-n_features = 13
+[input.obs_avhrr]
+name = "obs_avhrr"
+n_features = 7
 normalize = "minmax"
 
 [output.surface_precip]
